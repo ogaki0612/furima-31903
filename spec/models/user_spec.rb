@@ -54,6 +54,12 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors.full_messages).to include("Birth day can't be blank")
     end
+    it 'emailが一意性であること' do
+      @user.save
+      another_user = FactoryBot.build(:user, email: @user.email)
+      another_user.valid?
+      expect(another_user.errors.full_messages).to include("Email has already been taken")
+    end
     it 'emailに@が含まれていないと登録できない' do
       @user.email = 'abcdefg'
       @user.valid?

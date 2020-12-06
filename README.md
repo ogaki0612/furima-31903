@@ -30,7 +30,7 @@
 | postage_id       | integer    | null: false       |
 | region_id        | integer    | null: false       |
 | shipping_date_id | integer    | null: false       |
-| user_id          | references | foreign_key: true |
+| user             | references | foreign_key: true |
 
 ### Association
 
@@ -41,8 +41,8 @@
 
 | column        | type       | option            |
 | ------------- |------------| ------------------|
-| user_id       | references | foreign_key: true |
-| item_id       | references | foreign_key: true |
+| user          | references | foreign_key: true |
+| item          | references | foreign_key: true |
 
 ### Association
 
@@ -54,13 +54,13 @@
 
 | column        | type       | option            |
 | ------------- |------------| ------------------|
-| postal_code   | integer    | null: false       |
+| postal_code   | string     | null: false       |
 | prefecture_id | integer    | null: false       |
 | address_1     | string     | null: false       |
 | address_2     | string     | null: false       |
 | building      | string     |                   |
-| phone_number  | integer    | null: false       |
-| order_id      | references | foreign_ker: true |
+| phone_number  | string     | null: false       |
+| order         | references | foreign_key: true |
 
 ### Association
 

@@ -1,8 +1,8 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new,:edit]
-  before_action :set_item, only: [:show,:edit,:update, :destroy]
-  before_action :ensure_current_user, only: [:update,:destroy]
-  before_action :sold_out, only:[:edit]
+  before_action :authenticate_user!, only: [:new, :edit]
+  before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :ensure_current_user, only: [:update, :destroy]
+  before_action :sold_out, only: [:edit]
 
   def index
     @items = Item.includes(:user).order('created_at DESC')
@@ -51,14 +51,10 @@ class ItemsController < ApplicationController
   end
 
   def ensure_current_user
-    if @item.user_id != current_user.id
-     redirect_to action: :index 
-    end
+    redirect_to action: :index if @item.user_id != current_user.id
   end
 
   def sold_out
-    if Order.exists?(item_id: @item.id)
-      redirect_to root_path
-    end
+    redirect_to root_path if Order.exists?(item_id: @item.id)
   end
 end

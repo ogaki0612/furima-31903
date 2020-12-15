@@ -8,9 +8,9 @@ class OrderAddress
     validates :token
   end
 
-  validates :postal_code, presence: true, format: { with: /\A\d{3}[-]\d{4}\z/ }
+  validates :postal_code, presence: true, format: { with: /\A\d{3}-\d{4}\z/ }
 
-  validates :phone_number, presence: true, format:{ with: /\A\d{10,11}\z/ }
+  validates :phone_number, presence: true, format: { with: /\A\d{10,11}\z/ }
 
   validates :prefecture_id, numericality: { other_than: 0 }
 

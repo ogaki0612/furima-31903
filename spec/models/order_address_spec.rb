@@ -10,8 +10,12 @@ RSpec.describe OrderAddress, type: :model do
 
   describe '購入記録登録' do
     context '登録成功時' do
-      it '正しく入力されていれば登録できる' do
+      it '全ての項目が正しく入力されていれば登録できる' do
         expect(@order_address).to be_valid
+      end
+      it 'buildingが空でも登録できる' do
+      @order_address.building = ''
+      expect(@order_address).to be_valid
       end
     end
     context '登録失敗時' do

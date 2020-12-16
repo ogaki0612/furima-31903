@@ -1,8 +1,11 @@
 require 'rails_helper'
 
+
 RSpec.describe OrderAddress, type: :model do
   before do
-    @order_address = FactoryBot.build(:order_address)
+    @item = Item.create(id: 1)
+    @user = User.create(id: 1)
+    @order_address = FactoryBot.build(:order_address, user_id: @user.id, item_id: @item.id)
   end
 
   describe '購入記録登録' do
@@ -81,6 +84,16 @@ RSpec.describe OrderAddress, type: :model do
         @order_address.token = nil
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Token can't be blank")
+      end
+      it 'user_idが存在しないと登録できない' do
+        @order_address.user_id = nil
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("User can't be blank")
+      end
+      it 'item_idが存在しないと登録できない' do
+        @order_address.item_id = nil
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("Item can't be blank")
       end
     end
   end
